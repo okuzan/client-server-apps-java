@@ -1,3 +1,5 @@
+package Lab1;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -120,7 +122,7 @@ public class Packet {
         System.out.println("client:  " + clientID);
         System.out.println("packetID:  " + packetID);
         System.out.println("Length:  " + len);
-        System.out.println("CRC16 (head):  " + crcHead);
+        System.out.println("Lab1.CRC16 (head):  " + crcHead);
 
         byte[] head = ByteBuffer.allocate(14)
                 .order(ByteOrder.BIG_ENDIAN)
@@ -131,7 +133,7 @@ public class Packet {
                 .array();
 
         if (CRC16.crc16(head) != crcHead) {
-            throw new IllegalArgumentException("CRC16 head validation failed!");
+            throw new IllegalArgumentException("Lab1.CRC16 head validation failed!");
         }
 
         byte[] msgEnc = Arrays.copyOfRange(bytes, 24, 16 + len); // 16 + 4 + 4
@@ -145,7 +147,7 @@ public class Packet {
             e.printStackTrace();
         }
         if (CRC16.crc16(msgEnc) != crc16msg) {
-            throw new IllegalArgumentException("CRC16 message validation failed!");
+            throw new IllegalArgumentException("Lab1.CRC16 message validation failed!");
         }
 
         return new Packet(clientID, packetID, code, userId, message);
