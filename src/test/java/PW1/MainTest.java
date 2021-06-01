@@ -1,4 +1,4 @@
-package Lab1;
+package PW1;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

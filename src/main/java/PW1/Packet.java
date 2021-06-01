@@ -1,13 +1,11 @@
-package Lab1;
+package PW1;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
@@ -173,19 +171,14 @@ public class Packet {
         return msg;
     }
 
-    public String getMsg3() {
-//        return this.msg;
-        return "";
+    @Override
+    public String toString() {
+        return "Packet{" +
+                "clientId =" + clientId +
+                ", packetId=" + packetId +
+                ", code=" + code +
+                ", userId=" + userId +
+                ", msg=" + Arrays.toString(msg) +
+                '}';
     }
-
-    public String generatorKey() throws NoSuchAlgorithmException {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        SecureRandom secureRandom = new SecureRandom();
-        int keyBitSize = 256;
-        keyGenerator.init(keyBitSize, secureRandom);
-        SecretKey key = keyGenerator.generateKey();
-        System.out.println(Base64.getEncoder().encodeToString(key.getEncoded()));
-        return Base64.getEncoder().encodeToString(key.getEncoded());
-    }
-
 }

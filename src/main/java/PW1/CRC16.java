@@ -1,4 +1,4 @@
-package Lab1;
+package PW1;
 
 public class CRC16 {
 
