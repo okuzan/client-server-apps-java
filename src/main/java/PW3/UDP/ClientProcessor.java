@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class ClientProcessor extends Thread {
     private final Queue<Packet> queue = new ConcurrentLinkedQueue<>();
     private final int userID;
+    private final int lastPackedID = 0;
     private SocketAddress socketAddress;
 
     public ClientProcessor(final int userID) {
@@ -28,9 +29,15 @@ public class ClientProcessor extends Thread {
     public void run() {
         while (true) {
             Packet packet = queue.poll();
-            if (packet != null){
+            if (packet != null) {
                 System.out.format("[client %s] Processing packet %s\n", userID, packet.getPacketId());
-                Packet responsePacket = new Packet((byte) 1, 10L, 19, 10, "accepted".getBytes(StandardCharsets.UTF_8));
+                Packet responsePacket;
+                //checking if no losses
+                if (packet.getPacketId() != lastPackedID + 1) {
+                    responsePacket = new Packet((byte) 1, 10L, 911, 10, (String.valueOf(lastPackedID)).getBytes(StandardCharsets.UTF_8));
+                } else {
+                    responsePacket = new Packet((byte) 1, 10L, 19, 10, "accepted".getBytes(StandardCharsets.UTF_8));
+                }
                 ServerQueue.QUEUE.add(new AddressedPacket(responsePacket, socketAddress));
             }
         }
