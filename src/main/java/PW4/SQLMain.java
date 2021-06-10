@@ -170,17 +170,5 @@ public class SQLMain {
     public static void main(String[] args) {
         SQLMain sqlMain = new SQLMain();
         sqlMain.initialization("Warehouse");
-//        Product product1 = sqlMain.insertProductData(new Product("test", 13.2, 55.1));
-//        ProductFilter filter = new ProductFilter();
-//        filter.setName("bread");
-//        filter.setMinPrice(15.0);
-//        System.out.println(sqlMain.getByCriteria(filter));
-//        System.out.println(sqlMain.getAllProducts());
-//        sqlMain.deleteProduct(11);
-//        sqlMain.deleteProduct(5);
-//        System.out.println(sqlMain.getAllProducts());
-//        System.out.println(sqlMain.readProduct(1));
-//        System.out.println(sqlMain.readProduct(2));
-        sqlMain.updateProduct(12, "goodname", null, 100.1);
     }
 }
